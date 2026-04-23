@@ -1,0 +1,23 @@
+{
+  "mercado_livre": {
+    "tracking_id": "topfylinks",
+    "max_price": 300,
+    "search_limit": 50
+  },
+  "amazon": {
+    "affiliate_tag": "topfylinks-20",
+    "max_price": 300,
+    "search_limit": 30
+  },
+  "geral": {
+    "max_produtos": 100,
+    "debug": false,
+    "timezone": "America/Sao_Paulo"
+  },
+  "google_drive": {
+    "pasta_principal": "Topfy_Links",
+    "pasta_dados": "dados",
+    "pasta_scripts": "scripts",
+    "pasta_relatorios": "relatorios"
+  }
+}
