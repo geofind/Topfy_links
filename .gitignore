@@ -1,3 +1,21 @@
+# === Ativos de conteúdo / operação do canal (NÃO fazem parte do código do produto) ===
+# Estes diretórios contêm mídia bruta, planilhas e material de produção do canal.
+# Ficam no disco do usuário, mas não devem ser versionados no repositório de código.
+/ARQUIVOS_EDICAO/
+/DESIGN/
+/LOJA/
+/PRODUTOS/
+/ROTEIROS/
+/TIKTOK_SHOP/
+/VIDEOS_FINAIS/
+/VIDEOS_RASCUNHO/
+*.xlsx
+~$*.xlsx
+
+# === Supabase ===
+.supabase/
+supabase/.temp/
+
 # Dependencies
 **/node_modules
 .pnpm-store/
