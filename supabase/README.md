@@ -18,6 +18,10 @@ supabase link --project-ref <ref-do-projeto-compartilhado>
 supabase db push
 ```
 
+## Dados de desenvolvimento (Fase 1)
+
+Depois da migration aplicada e de existir pelo menos um usuário (signup normal via Supabase Auth), rodar `seed.sql` (SQL Editor ou `supabase db execute -f supabase/seed.sql` / incluso automaticamente em `supabase db reset` local) para popular `canaltopfy.agent_runs` com o mesmo dataset usado no mock do frontend (`apps/web/lib/agent-runs/mock-client.ts`) — satisfaz a Fase 1 ("dados simulados persistidos... não mock no front").
+
 ## Pendências
 
 - Credenciais do projeto (URL, anon key, service role key) ainda não foram compartilhadas neste ambiente — necessárias para configurar `apps/web` (client Supabase) e os Workers (service role, para escrever em `agent_runs` ignorando RLS).
