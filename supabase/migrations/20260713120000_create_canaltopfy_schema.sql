@@ -89,3 +89,19 @@ create policy "agent_runs_select_own"
 
 create index agent_runs_user_id_idx on canaltopfy.agent_runs (user_id);
 create index agent_runs_status_idx on canaltopfy.agent_runs (status);
+
+-- === grants ==================================================================
+-- Schemas fora de `public` não são acessíveis via PostgREST só por estarem
+-- "exposed" e terem RLS — o role precisa também do GRANT de schema/tabela;
+-- sem isso o PostgREST retorna "permission denied for schema canaltopfy"
+-- antes mesmo de a RLS ser avaliada. `authenticated` só ganha os privilégios
+-- que as policies acima já restringem a "próprio usuário"; `service_role`
+-- ignora RLS por padrão no Supabase, então os grants aqui não abrem nada novo
+-- para ele além do que já teria.
+
+grant usage on schema canaltopfy to authenticated, service_role;
+
+grant select, update on canaltopfy.profiles to authenticated;
+grant select on canaltopfy.agent_runs to authenticated;
+
+grant all on canaltopfy.profiles, canaltopfy.agent_runs to service_role;
