@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check if apps/web exists yet
+        id: check
+        run: |
+          if [ -f "apps/web/package.json" ]; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::apps/web ainda não existe (ticket 0001 em andamento) — pulando CI de frontend."
+          fi
+
+      - uses: pnpm/action-setup@v4
+        if: steps.check.outputs.exists == 'true'
+
+      - uses: actions/setup-node@v4
+        if: steps.check.outputs.exists == 'true'
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        if: steps.check.outputs.exists == 'true'
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        if: steps.check.outputs.exists == 'true'
+        run: pnpm --filter web lint
+
+      - name: Typecheck
+        if: steps.check.outputs.exists == 'true'
+        run: pnpm --filter web exec tsc --noEmit
+
+      - name: Build
+        if: steps.check.outputs.exists == 'true'
+        run: pnpm --filter web build
