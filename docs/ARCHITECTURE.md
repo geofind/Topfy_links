@@ -287,12 +287,18 @@ O CanalTopfy deverá se tornar uma plataforma SaaS capaz de:
 * **GitHub:** já existe repositório remoto (aguardando URL exata para configurar `origin`).
 * **Workflow Engine:** **Activepieces** (self-hosted, MIT), em vez de n8n e em vez de construção 100% própria — Windmill foi tecnicamente superior mas descartado por licença (AGPL + cláusula anti-embedding comercial). Ver [ADR 0002](architecture-decisions/0002-activepieces-como-workflow-engine.md) e [comparação técnica completa](architecture/workflow-engine-decision.md).
 
-## Decisões em aberto (bloqueiam o scaffold de código da Fase 0)
+## Já scaffolded, aguardando credenciais/execução real
+
+* **CI/CD:** `.github/workflows/ci.yml` escrito localmente (lint/typecheck/build do `apps/web`, pula automaticamente enquanto o app não existe) — **ainda não enviado ao repositório**: o PAT atual não tem permissão "Workflows", necessária pelo GitHub para criar/atualizar arquivos em `.github/workflows/`.
+* **Activepieces:** `integrations/activepieces/docker-compose.yml` + `.env.example` — não testado neste ambiente (sem Docker disponível aqui).
+* **Supabase:** `supabase/migrations/20260713120000_create_canaltopfy_schema.sql` (schema `canaltopfy`, `profiles`, `agent_runs`, RLS) — não aplicado ainda (sem credenciais do projeto compartilhado nem Supabase CLI neste ambiente). Ver `supabase/README.md`.
+
+## Decisões em aberto (bloqueiam execução real, não o scaffold de código)
 
 Não são decisões que a arquitetura resolve sozinha — dependem de recursos/contas do usuário:
 
-* URL exata do repositório remoto no GitHub (para configurar `origin` e habilitar GitHub Actions).
-* Hospedagem do frontend Next.js (Vercel, self-host, outro).
+* Credenciais do projeto Supabase compartilhado (URL, anon key, service role key).
+* Hospedagem do frontend Next.js (Vercel, self-host, outro) e do Activepieces/OpenClaw (mesma VPS? serviços gerenciados separados?).
 * OpenClaw: já existe instância provisionada, ou faz parte do escopo de setup da Fase 0?
 * IA Providers: quais chaves/contas já existem (Claude, GPT, Gemini)?
 
