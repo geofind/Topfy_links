@@ -291,15 +291,16 @@ O CanalTopfy deverá se tornar uma plataforma SaaS capaz de:
 
 * **CI/CD:** `.github/workflows/ci.yml` escrito localmente (lint/typecheck/build do `apps/web`, pula automaticamente enquanto o app não existe) — **ainda não enviado ao repositório**: o PAT atual não tem permissão "Workflows", necessária pelo GitHub para criar/atualizar arquivos em `.github/workflows/`.
 * **Activepieces:** `integrations/activepieces/docker-compose.yml` + `.env.example` — não testado neste ambiente (sem Docker disponível aqui).
-* **Supabase:** `supabase/migrations/20260713120000_create_canaltopfy_schema.sql` (schema `canaltopfy`, `profiles`, `agent_runs`, RLS) — não aplicado ainda (sem credenciais do projeto compartilhado nem Supabase CLI neste ambiente). Ver `supabase/README.md`.
+* **Supabase:** `supabase/migrations/20260713120000_create_canaltopfy_schema.sql` (schema `canaltopfy`, `profiles`, `agent_runs`, RLS) e `supabase/seed.sql` (dados de dev da Fase 1) — não aplicados ainda (sem credenciais do projeto compartilhado nem Supabase CLI neste ambiente). Ver `supabase/README.md`.
+* **OpenClaw:** confirmado via fonte oficial (`github.com/openclaw/openclaw`) o que é e como se instala — daemon Node.js (não Docker-first como o Activepieces), Skills em `~/.openclaw/workspace/skills/`. Ver `integrations/openclaw/README.md`.
 
 ## Decisões em aberto (bloqueiam execução real, não o scaffold de código)
 
 Não são decisões que a arquitetura resolve sozinha — dependem de recursos/contas do usuário:
 
 * Credenciais do projeto Supabase compartilhado (URL, anon key, service role key).
-* Hospedagem do frontend Next.js (Vercel, self-host, outro) e do Activepieces/OpenClaw (mesma VPS? serviços gerenciados separados?).
-* OpenClaw: já existe instância provisionada, ou faz parte do escopo de setup da Fase 0?
+* Hospedagem do frontend Next.js (Vercel, self-host, outro), do Activepieces e do daemon OpenClaw (mesma VPS? serviços gerenciados separados?).
+* OpenClaw: qual provedor/modelo de IA usar (`agent.model`) e quais chaves já existem.
 * IA Providers: quais chaves/contas já existem (Claude, GPT, Gemini)?
 
 Ver levantamento formal em [`docs/tasks/`](tasks/).
