@@ -13,4 +13,6 @@ Antes de abrir um ticket como concluído, rodar o checklist de "Definição de P
 | [0003](0003-frontend-central-de-agentes.md) | Central de Agentes (feed de execuções, tempo real mockado) | Codex | 0001, 0002 | concluído |
 | [0004](0004-formatting-and-review-followups.md) | Formatação real (Prettier) e fechamento da revisão 0001–0003 | Codex | 0001, 0002, 0003 | concluído |
 
+| [0005](0005-frontend-dashboard-overview.md) | Dashboard (visão geral): KPIs, gráfico e atividade recente | Codex | 0001, 0002, 0003, 0004 | aberto |
+
 Verificado por Claude em 2026-07-13: `lint`, `typecheck`, `test` (5/5) e `build` de produção passam limpos após o commit `df3fa5a`.
