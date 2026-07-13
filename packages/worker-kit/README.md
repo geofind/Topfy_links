@@ -36,6 +36,5 @@ Em testes, use um fake `AgentRunsRepository` em memória (ver `src/run-worker.te
 
 ## Pendências
 
-- **Ainda não instalado no workspace pnpm**: tentei rodar `pnpm install` na raiz para descobrir este pacote via o glob `packages/*` já existente em `pnpm-workspace.yaml`, mas o ambiente de execução deste agente não consegue alcançar `registry.npmjs.org` para pacotes novos ainda não resolvidos (`UNABLE_TO_VERIFY_LEAF_SIGNATURE` em `@supabase/supabase-js` e suas dependências — mesma limitação de rede/TLS já vista ao tentar `npx prettier`). A tentativa não alterou `pnpm-lock.yaml`/`package.json` da raiz (verificado via `git status` antes/depois). Rodar `pnpm install` de novo num ambiente com acesso normal ao npm (ex.: onde o Codex já roda) deve resolver.
-- Até isso acontecer, `pnpm --filter worker-kit typecheck`/`test` não funcionam (sem `node_modules`) — não testado neste ambiente.
-- `SupabaseAgentRunsRepository` não foi validado contra um projeto Supabase real (sem credenciais ainda — ver `supabase/README.md`).
+- Instalado e verificado: `pnpm --filter worker-kit typecheck` e `pnpm --filter worker-kit test` passam (3/3 testes). A primeira tentativa de `pnpm install` falhou neste ambiente por um erro de TLS (`UNABLE_TO_VERIFY_LEAF_SIGNATURE` ao buscar `@supabase/supabase-js` em `registry.npmjs.org`) — resolvido rodando com `NODE_OPTIONS=--use-system-ca` (o Node não estava usando o truststore de CA do sistema operacional).
+- `SupabaseAgentRunsRepository` ainda não foi validado contra um projeto Supabase real (sem credenciais ainda — ver `supabase/README.md`) — só o typecheck/tipos foram verificados, não uma chamada de verdade.
