@@ -8,5 +8,6 @@ Antes de abrir um ticket como concluído, rodar o checklist de "Definição de P
 
 | # | Título | Responsável | Depende de | Status |
 |---|---|---|---|---|
-| [0001](0001-frontend-nextjs-scaffold-design-system.md) | Scaffold Next.js + Design System | Codex | — | aberto |
-| [0002](0002-frontend-login-dashboard-shell.md) | Telas de Login e Dashboard shell | Codex | 0001 | aberto |
+| [0001](0001-frontend-nextjs-scaffold-design-system.md) | Scaffold Next.js + Design System | Codex | — | em andamento |
+| [0002](0002-frontend-login-dashboard-shell.md) | Telas de Login e Dashboard shell | Codex | 0001 | em andamento |
+| [0003](0003-frontend-central-de-agentes.md) | Central de Agentes (feed de execuções, tempo real mockado) | Codex | 0001, 0002 | aberto |
