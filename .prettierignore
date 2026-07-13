@@ -1,5 +1,6 @@
 dist
 node_modules
+.next
 .git
 *.min.js
 *.min.css

@@ -25,19 +25,38 @@ docs/
   architecture-decisions/   # ADRs — toda implementação própria justificada aqui
   tasks/                    # tickets de trabalho (template + tickets ativos)
   legacy/                   # documentação de projetos anteriores herdados neste repo
-apps/                       # aplicações (frontend Next.js, etc.) — a criar na Fase 0
+apps/
+  web/                      # frontend Next.js (App Router, Design System e telas)
 workers/                    # workers TypeScript (agentes, integrações) — a criar
 supabase/                   # schema, migrations, RLS, edge functions — a criar
 integrations/               # config de Activepieces, ferramentas OpenClaw — a criar
 ```
 
-Ferramentas de scaffold já presentes na raiz (`package.json`, `pnpm-lock.yaml`, `vite.config.ts`, `tsconfig*.json`, `components.json`, `.prettierrc`) vêm do scaffold Vite/shadcn herdado do Topfy Links — serão avaliadas/migradas para o app Next.js da Fase 0 (ver `docs/tasks/`).
+O frontend reutiliza Next.js, Tailwind CSS e os primitivos shadcn/ui/Radix para manter o Design System substituível e evitar componentes básicos proprietários.
 
 As pastas `DESIGN/`, `PRODUTOS/`, `LOJA/`, `ROTEIROS/`, `TIKTOK_SHOP/`, `VIDEOS_*` e as planilhas na raiz são **ativos de conteúdo/operação do canal** (mídia, roteiros, planilhas de produto) — não fazem parte do código do produto e estão fora do controle de versão (`.gitignore`).
 
 ## Como rodar
 
-Ainda não aplicável — aguardando scaffold executável da Fase 0 (Next.js + Supabase). Este README será atualizado assim que houver `apps/web` executável.
+Requisitos: Node.js 20.9+ e pnpm 11.
+
+```bash
+pnpm install
+pnpm --filter web dev
+```
+
+Abra `http://localhost:3000`. A aplicação redireciona para `/login`; durante o desenvolvimento da interface, qualquer email válido e senha não vazia criam uma sessão mockada somente em memória. Recarregar a página encerra essa sessão. Nenhuma credencial ou dado é enviado ao Supabase neste estágio.
+
+A rota `/agentes` usa um feed de desenvolvimento explicitamente identificado como **simulação local**. O `MockAgentRunsClient` atualiza progresso, tokens, custos e estados em memória pelo mesmo contrato que será implementado pelo Supabase Realtime; esses registros não representam dados de produção.
+
+Gates de qualidade:
+
+```bash
+pnpm lint
+pnpm build
+pnpm typecheck
+pnpm test
+```
 
 ## Contribuindo
 
